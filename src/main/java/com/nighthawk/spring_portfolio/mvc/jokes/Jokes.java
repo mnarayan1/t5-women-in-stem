@@ -18,6 +18,7 @@ public class Jokes {
     private Long id;
 
     @Column(unique = true)
-    private String joke;
-
+    private String name;
+    private int price;
+    private String seller;
 }

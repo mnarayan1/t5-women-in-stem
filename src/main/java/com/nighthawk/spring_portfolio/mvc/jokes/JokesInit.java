@@ -1,5 +1,6 @@
 package com.nighthawk.spring_portfolio.mvc.jokes;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +21,21 @@ public class JokesInit {
             // Fail safe data validations
 
             // starting jokes
-            final String[] jokesArray = {
-                    "PE Lock, bob@urmom.com",
-                    "AP Calculus BC Prep Book, bob@urmom.com",
-                    "Pranavi's Apple Bundle *Not Clickbait*, bob@urmom.com",
-                    "Meena's TINspire, bob@urmom.com",
+            final Jokes[] jokesArray = {
+                    new Jokes(null, "PE Lock", 10, "Bob Joe"),
+                    new Jokes(null, "Apple Juice", 5, "Richard"),
+                    new Jokes(null, "AP Calculus BC Prep Book ", 15, "Mike"),
+                    new Jokes(null, "Used Mac *NOT CLICKBAIT*", 100, "Pranavi"),
+                    new Jokes(null, "test entry", 100000, "mads"),
+                    new Jokes(null, "idk", 600, "idk")
             };
 
             // make sure Joke database is populated with starting jokes
-            for (String joke : jokesArray) {
-                List<Jokes> test = repository.findByJokeIgnoreCase(joke); // JPA lookup
-                if (test.size() == 0)
-                    repository.save(new Jokes(null, joke)); // JPA save
+            for (Jokes joke : jokesArray) {
+                List<Jokes> test = repository.findByNameIgnoreCase(joke.getName());
+                if (test.size() == 0) {
+                    repository.save(joke); // JPA save
+                }
             }
         };
     }
