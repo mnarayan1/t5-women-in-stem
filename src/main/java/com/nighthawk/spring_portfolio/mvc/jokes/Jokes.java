@@ -21,4 +21,5 @@ public class Jokes {
     private String name;
     private int price;
     private String seller;
+    private String image;
 }
