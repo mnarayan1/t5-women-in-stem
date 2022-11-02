@@ -28,4 +28,12 @@ public class JokesApiController {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
+
+    @PostMapping("/create/{name}/{price}/{seller}/{image}")
+    public ResponseEntity<Jokes> createJoke(@PathVariable String name, @PathVariable Integer price,
+            @PathVariable String seller, @PathVariable String image) {
+        repository.saveAndFlush(new Jokes(null, name, price, seller, image));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
